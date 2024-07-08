@@ -1,0 +1,13 @@
+# camel-k: language=yaml
+
+# Write your routes here, for example:
+- route:
+    id: route-6224
+    from:
+      uri: timer:yaml
+      parameters:
+        period: "1000"
+      steps:
+        - setBody:
+            simple: Hello Camel from ${routeId}
+        - log: ${body}

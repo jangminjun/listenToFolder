@@ -1,0 +1,26 @@
+# camel-k: language=yaml
+
+# Write your routes here, for example:
+- route:
+    id: route-3374
+    from:
+      id: from-2865
+      uri: file-watch:C:\Users\USER\test
+      parameters:
+        recursive: false
+      steps:
+        - filter:
+            id: filter-3769
+            steps:
+              - to:
+                  id: to-2806
+                  uri: file:C:\Users\USER\testFiltered
+                  parameters:
+                    fileName: testFiltered.txt
+            expression:
+              simple:
+                expression: ${header.title} contains 'TEST'
+        - log:
+            id: log-1256
+            message: Detected ${header.CamelFileEventType} on file ${header.CamelFileName}
+              at ${header.CamelFileLastModified}
